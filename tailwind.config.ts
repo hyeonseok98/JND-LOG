@@ -18,7 +18,15 @@ const config: Config = {
       fontFamily: {
         pretendard: ["var(--font-pretendard)"],
       },
-      zIndex: {},
+      spacing: {
+        header: "60px",
+      },
+      height: {
+        "screen-header": "calc(100vh - theme('spacing.header'))",
+      },
+      zIndex: {
+        header: 100,
+      },
     },
   },
   plugins: [],

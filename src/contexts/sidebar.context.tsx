@@ -3,17 +3,17 @@
 import { createContext, ReactNode, useContext, useState } from "react";
 
 type SidebarContextType = {
-  opened: boolean;
+  isOpened: boolean;
   toggle: () => void;
 };
 
 const SidebarContext = createContext<SidebarContextType | undefined>(undefined);
 
 export function SidebarProvider({ children }: { children: ReactNode }) {
-  const [opened, setOpened] = useState(false);
-  const toggle = () => setOpened((isOpened) => !isOpened);
+  const [isOpened, setIsOpened] = useState(true);
+  const toggle = () => setIsOpened((isOpened) => !isOpened);
 
-  return <SidebarContext.Provider value={{ opened, toggle }}>{children}</SidebarContext.Provider>;
+  return <SidebarContext.Provider value={{ isOpened, toggle }}>{children}</SidebarContext.Provider>;
 }
 
 export function useSidebar() {

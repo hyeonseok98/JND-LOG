@@ -2,12 +2,14 @@ import Header from "@/components/header";
 import Sidebar from "@/components/sidebar";
 import { PropsWithChildren } from "react";
 
-export default function layout({ children }: PropsWithChildren) {
+export default function mainLayout({ children }: PropsWithChildren) {
   return (
-    <div className="flex">
+    <div className="relative">
       <Header />
-      <Sidebar />
-      <main className="flex-1">{children}</main>
+      <div className="flex pt-[60px] h-screen">
+        <Sidebar />
+        <main className="flex-1 overflow-auto bg-white">{children}</main>
+      </div>
     </div>
   );
 }
