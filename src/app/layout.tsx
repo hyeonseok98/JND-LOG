@@ -1,4 +1,4 @@
-import { ReactQueryProvider } from "@/contexts";
+import { ReactQueryProvider, SidebarProvider } from "@/contexts";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
@@ -23,7 +23,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${pretendard.className} antialiased`}>
-        <ReactQueryProvider>{children}</ReactQueryProvider>
+        <ReactQueryProvider>
+          <SidebarProvider>{children}</SidebarProvider>
+        </ReactQueryProvider>
       </body>
     </html>
   );
