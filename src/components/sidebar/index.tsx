@@ -1,59 +1,79 @@
 "use client";
-
-import ad from "@/assets/icons/lol-line-icon/ad-line-gold.svg";
-import jungle from "@/assets/icons/lol-line-icon/jg-line-gold.svg";
-import mid from "@/assets/icons/lol-line-icon/mid-line-gold.svg";
-import support from "@/assets/icons/lol-line-icon/sup-line-gold.svg";
-import top from "@/assets/icons/lol-line-icon/top-line-gold.svg";
-
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import Avatar from "@/components/ui/avatar";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { StreamerInfos } from "@/constants/streamers";
 import { useSidebar } from "@/contexts";
-import cn from "@/lib/tailwind-cn";
+import cn from "@/lib";
 import Image from "next/image";
-import { useState } from "react";
-
-const MENU = [
-  { label: "TOP", icon: top },
-  { label: "JUNGLE", icon: jungle },
-  { label: "MID", icon: mid },
-  { label: "AD", icon: ad },
-  { label: "SUPPORT", icon: support },
-];
-
-const STREAMER_LIST = {
-  TOP: ["푸린", "승우아빠", "치킨쿤", "맛수령", "룩삼", "던"],
-  JUNGLE: ["소우릎", "플레임", "인섹", "엠비션", "갱맘", "큐베"],
-  MID: ["인간젤리", "헤징", "트롤야", "피닉스박", "노페", "네클릿"],
-  AD: ["러너", "따효니", "플러리", "눈꽃", "마소킴", "강퀴"],
-  SUPPORT: ["크캣", "라콩", "고수달", "캡틴잭", "이희태", "매드라이프"],
-};
 
 export default function Sidebar() {
   const { isOpened } = useSidebar();
-  const [showStreamer, setShowStreamer] = useState(true);
 
   return (
     <aside
       className={cn(
-        "h-screen-header bg-dark text-white transition-all duration-300 overflow-hidden",
-        isOpened ? "w-[220px]" : "w-[60px]",
+        "bg-dark text-white transition-all duration-300 overflow-y-auto scrollbar-hide",
+        isOpened ? "w-[218px] px-3" : "w-[60px]",
       )}
     >
-      <div className="bg-blue-500 w-4 h-4">ㅎㅇ</div>
-      <ul className="mt-4 flex flex-col">
-        {MENU.map((m) => (
-          <li
-            key={m.label}
-            className={cn(
-              "flex items-center hover:bg-[#222] cursor-pointer",
-              isOpened ? "px-3 py-[10px]" : "justify-center h-10",
-            )}
-          >
-            <Image src={m.icon} alt={`${m.label} icon`} width={20} height={20} />
+      <Accordion type="multiple" defaultValue={StreamerInfos.map(({ line }) => line)} className="mt-4 space-y-1">
+        {StreamerInfos.map(({ line, icon, members }) => (
+          <AccordionItem key={line} value={line} className="border-b border-white/10">
+            <AccordionTrigger
+              className={cn(
+                "flex items-center w-full py-2 hover:bg-white/5 cursor-pointer",
+                isOpened ? "gap-3 px-2 hover:no-underline" : "justify-center px-2 gap-1",
+              )}
+            >
+              <Image src={icon} alt={line} width={20} height={20} />
+              {isOpened && <span className="text-sm font-medium">{line}</span>}
+            </AccordionTrigger>
 
-            {isOpened && <span className="ml-3 text-[14px] whitespace-nowrap">{m.label}</span>}
-          </li>
+            <AccordionContent>
+              {/* 사이드 바 펼쳤을 때 */}
+              {isOpened ? (
+                <ul className="pl-9 pb-1">
+                  {members.map(({ name }) => (
+                    <li key={name} className="py-[3px] text-xs cursor-pointer">
+                      {name}
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                /* 사이드 바 접었을  */
+                <TooltipProvider delayDuration={150}>
+                  <ul className="flex flex-col items-center gap-[10px] py-2">
+                    {members.map(({ name, avatar, channelId }) => (
+                      <li key={name}>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <div>
+                              {/* asChild 사용시 단일의 React Element를 넘겨야 함으로 div로 감쌈*/}
+                              <Avatar src={avatar} alt={name} size={28} />
+                            </div>
+                          </TooltipTrigger>
+
+                          <TooltipContent
+                            side="right"
+                            sideOffset={12}
+                            className="flex justify-center items-center p-2 rounded-md bg-black text-white text-xs"
+                          >
+                            <div className="mb-1 text-xs font-medium text-white">{name}</div>
+
+                            {/* 라이브 썸네일 (lazy fetch) */}
+                            {/* <LiveThumbnail channelId={channelId} /> */}
+                          </TooltipContent>
+                        </Tooltip>
+                      </li>
+                    ))}
+                  </ul>
+                </TooltipProvider>
+              )}
+            </AccordionContent>
+          </AccordionItem>
         ))}
-      </ul>
+      </Accordion>
     </aside>
   );
 }
