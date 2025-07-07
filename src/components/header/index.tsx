@@ -7,7 +7,7 @@ export default function Header() {
   const { toggle } = useSidebar();
 
   return (
-    <header className="flex items-center fixed top-0 left-0 right-0 h-[60px] px-4 bg-dark text-white z-header">
+    <header className="flex items-center fixed top-0 left-0 right-0 h-[60px] px-4 bg-dark text-white whitespace-nowrap z-header">
       <button className="mr-4 text-[22px] cursor-pointer" onClick={toggle}>
         ☰
       </button>

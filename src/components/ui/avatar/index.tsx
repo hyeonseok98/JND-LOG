@@ -1,11 +1,11 @@
 import Image, { StaticImageData } from "next/image";
 
-type AvatarProps = {
+export interface AvatarProps {
   src: string | StaticImageData;
   alt?: string;
   size?: number;
   isLive?: boolean;
-};
+}
 
 export default function Avatar({ src, alt = "profile image", size = 32, isLive = false }: AvatarProps) {
   return (
