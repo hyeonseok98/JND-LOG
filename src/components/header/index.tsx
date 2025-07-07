@@ -21,7 +21,7 @@ export default function Header() {
   return (
     <header
       className={clsx(
-        "flex items-center fixed inset-x-0 top-0 h-[60px] px-6 z-header",
+        "flex items-center fixed inset-x-0 top-0 h-[64px] px-6 z-header",
         "transition-[background-color,backdrop-filter] duration-200",
 
         scrolled ? "bg-white/10 backdrop-blur-md border-b border-white/15" : "bg-dark text-white", // or bg-dark
@@ -34,7 +34,7 @@ export default function Header() {
         자낳대 LOG
       </Link>
 
-      <nav className="ml-auto mr-12 flex gap-x-7 text-sm font-medium">
+      <nav className="ml-auto mr-12 flex gap-x-8 font-medium">
         {NAV_LISTS.map(({ href, label }) => (
           <Link
             key={href}
