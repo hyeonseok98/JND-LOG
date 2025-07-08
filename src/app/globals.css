@@ -1,6 +1,12 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+@layer utilities {
+  .font-spoqahansans-bold {
+    font-family: var(--font-spoqahansans-bold);
+  }
+}
+
 @custom-variant dark (&:is(.dark *));
 
 .scrollbar-hide::-webkit-scrollbar {

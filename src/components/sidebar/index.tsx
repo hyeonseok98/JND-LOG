@@ -20,6 +20,7 @@ function Sidebar() {
     <aside
       className={cn(
         "bg-dark text-white overflow-y-auto scrollbar-hide transition-all border-r border-r-gray-500",
+        "hidden md:block",
         isOpened ? "w-[218px] px-3" : "w-[60px]",
       )}
     >
@@ -35,7 +36,7 @@ function Sidebar() {
                 )}
               >
                 <Image src={icon} alt={line} width={20} height={20} />
-                {isOpened && <span className="text-sm font-medium">{line}</span>}
+                {isOpened && <span className="text-sm font-semibold">{line}</span>}
               </AccordionTrigger>
 
               {/* 스트리머 리스트 */}
