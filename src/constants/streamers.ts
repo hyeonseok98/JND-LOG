@@ -74,7 +74,7 @@ export const StreamerInfos: LineInfo[] = [
     ],
   },
   {
-    line: "JUNGLE",
+    line: "JG",
     icon: iconJungle,
     members: [
       { name: "갱맘", avatar: GangMam, channelId: "dbd6e0689ff9debf8bb00a415786654c" },
@@ -110,7 +110,7 @@ export const StreamerInfos: LineInfo[] = [
     ],
   },
   {
-    line: "SUPPORT",
+    line: "SUP",
     icon: iconSupport,
     members: [
       { name: "고수달", avatar: GoSuDal, channelId: "1343a0e30ff0acb09f2477a698d070a4" },

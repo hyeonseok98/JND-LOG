@@ -31,15 +31,21 @@ export default function TeamPanel() {
 
   if (!team || selectedLine) {
     return (
-      <h4 className="flex flex-col justify-center items-center h-full text-center text-zinc-500 text-sm">
-        슬롯을 먼저 선택한 뒤<br />
-        오른쪽에서 선수를 고르세요
-      </h4>
+      <>
+        <div className="flex flex-col justify-center items-center h-full gap-4 text-center text-zinc-500 text-sm">
+          <p>
+            1. 포인트 차등제는 정글(팀장)의 <br /> 포인트를 조절해서 책정해 주세요.
+          </p>
+          2. 슬롯을 먼저 선택한 뒤<br />
+          오른쪽에서 선수를 고르세요.
+        </div>
+      </>
     );
   }
 
   return (
-    <div className="space-y-4 p-4 overflow-y-auto">
+    <section className="space-y-4 p-4 overflow-y-auto scrollbar-hidden">
+      <h3 className="pb-4 text-lg font-semibold text-center">포인트 분배</h3>
       {Object.entries(team.slots).map(([lineKey, slot]) =>
         slot.player ? (
           <CostRow
@@ -51,6 +57,6 @@ export default function TeamPanel() {
           />
         ) : null,
       )}
-    </div>
+    </section>
   );
 }
