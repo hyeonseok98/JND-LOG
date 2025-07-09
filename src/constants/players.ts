@@ -10,7 +10,7 @@ export const PLAYERS: Player[] = StreamerInfos.flatMap(({ line, members }) =>
     name: m.name,
     avatar: m.avatar,
     line,
-    cost: 100,
+    cost: line === "JG" ? 0 : 100,
   })),
 );
 

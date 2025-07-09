@@ -13,7 +13,7 @@ export default function DraftPage() {
           <TeamPanel />
         </div>
 
-        <div className="flex-1 overflow-y-auto px-8 py-6">
+        <div className="flex-1 overflow-y-auto px-8 py-6 scrollbar-hide">
           <PlayerPool />
         </div>
       </section>
