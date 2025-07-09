@@ -1,6 +1,8 @@
 import { LolLine, Player, Slot, Team } from "@/types/draft";
 import { StreamerInfos } from "./streamers";
 
+export const LOL_LINES: LolLine[] = ["TOP", "JUNGLE", "MID", "AD", "SUPPORT"];
+
 // 선수 풀
 export const PLAYERS: Player[] = StreamerInfos.flatMap(({ line, members }) =>
   members.map((m) => ({
@@ -8,7 +10,7 @@ export const PLAYERS: Player[] = StreamerInfos.flatMap(({ line, members }) =>
     name: m.name,
     avatar: m.avatar,
     line,
-    cost: 200,
+    cost: 100,
   })),
 );
 
@@ -33,10 +35,10 @@ const makeTeam = (id: string, junglerName: string, budget: number): Team => {
 };
 
 export const INITIAL_TEAMS: Team[] = [
-  makeTeam("team-ambition", "엠비션", 780),
-  makeTeam("team-souruup", "소우릎", 750),
-  makeTeam("team-gangmam", "갱맘", 700),
-  makeTeam("team-flame", "플레임", 680),
-  makeTeam("team-nofe", "노페", 820),
-  makeTeam("team-hejing", "헤징", 720),
+  makeTeam("team-gangmam", "갱맘", 1000),
+  makeTeam("team-souruup", "소우릎", 1000),
+  makeTeam("team-ambition", "엠비션", 1000),
+  makeTeam("team-insec", "인섹", 1000),
+  makeTeam("team-cuvee", "큐베", 1000),
+  makeTeam("team-flame", "플레임", 1000),
 ];

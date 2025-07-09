@@ -11,7 +11,6 @@ interface PlayerCardProps {
 export default function PlayerCard({ player, disabled, onPick }: PlayerCardProps) {
   return (
     <button
-      type="button"
       disabled={disabled}
       onClick={onPick}
       className={cn(
@@ -19,7 +18,13 @@ export default function PlayerCard({ player, disabled, onPick }: PlayerCardProps
         disabled ? "opacity-25 cursor-not-allowed" : "hover:opacity-90 active:scale-95 cursor-pointer",
       )}
     >
-      <Image src={player.avatar} alt={player.name} width={56} height={56} className="rounded-full" />
+      <Image
+        src={player.avatar}
+        alt={player.name}
+        width={56}
+        height={56}
+        className="w-14 h-14 rounded-full object-cover"
+      />
       <span className="text-[10px] leading-tight text-center">
         {player.name}
         <br />
