@@ -1,3 +1,4 @@
+import { LolLine } from "@/types/lol-line";
 import { StaticImageData } from "next/image";
 
 /* ───────── 라인 아이콘 ───────── */
@@ -47,8 +48,6 @@ import HeeTae from "@/assets/images/player-profile/sup/sup-이희태-default.web
 import CaptainJack from "@/assets/images/player-profile/sup/sup-캡틴잭-default.webp";
 import CrazyCat from "@/assets/images/player-profile/sup/sup-크캣-default.webp";
 
-export type LOL_LINE = "TOP" | "JUNGLE" | "MID" | "AD" | "SUPPORT";
-
 export interface StreamerInfo {
   name: string;
   avatar: StaticImageData;
@@ -56,7 +55,7 @@ export interface StreamerInfo {
 }
 
 export interface LineInfo {
-  line: LOL_LINE;
+  line: LolLine;
   icon: StaticImageData;
   members: StreamerInfo[];
 }
