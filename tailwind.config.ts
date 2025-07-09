@@ -7,6 +7,7 @@ const config: Config = {
       fontFamily: {
         pretendard: ["var(--font-pretendard)"],
       },
+
       spacing: {
         header: "60px",
       },
@@ -16,6 +17,13 @@ const config: Config = {
       zIndex: {
         header: 100,
       },
+    },
+    screens: {
+      xs: { max: "480px" },
+      sm: "481px",
+      md: "769px",
+      lg: "1025px",
+      xl: "1281px",
     },
   },
   plugins: [],

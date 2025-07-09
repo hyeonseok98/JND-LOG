@@ -35,7 +35,7 @@ export default function ProfileCard({
   return (
     <div className={`flex items-center w-fit max-w-fit ${spacing}`}>
       <Avatar src={src} alt={alt} size={avatar} isLive={isLive} />
-      <span className={`${text} font-semibold`}>{name}</span>
+      <span className={`${text} font-semibold whitespace-nowrap`}>{name}</span>
     </div>
   );
 }

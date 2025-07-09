@@ -2,6 +2,7 @@ import ProfileCard from "@/components/profile-card";
 import Avatar from "@/components/ui/avatar";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import Image, { StaticImageData } from "next/image";
+import Link from "next/link";
 
 interface StreamerProps {
   opened: boolean;
@@ -10,21 +11,37 @@ interface StreamerProps {
   avatar: StaticImageData;
   isLive?: boolean;
   thumbnailUrl?: string | null;
+  channelId: string;
 }
 
-export default function StreamerTooltip({ opened, loading, name, avatar, isLive, thumbnailUrl }: StreamerProps) {
+export default function StreamerList({
+  opened,
+  loading,
+  name,
+  avatar,
+  isLive,
+  thumbnailUrl,
+  channelId,
+}: StreamerProps) {
   return (
     <Tooltip>
       <TooltipTrigger asChild>
-        {opened ? (
-          <div>
-            <ProfileCard src={avatar} name={name} size="sm" isLive={isLive} />
-          </div>
-        ) : (
-          <div>
-            <Avatar src={avatar} alt={name} size={28} isLive={isLive} />
-          </div>
-        )}
+        <Link
+          href={`https://chzzk.naver.com/live/${channelId}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-block"
+        >
+          {opened ? (
+            <div>
+              <ProfileCard src={avatar} name={name} size="sm" isLive={isLive} />
+            </div>
+          ) : (
+            <div>
+              <Avatar src={avatar} alt={name} size={28} isLive={isLive} />
+            </div>
+          )}
+        </Link>
       </TooltipTrigger>
 
       <TooltipContent side="right" sideOffset={14} className="p-0 border-none">

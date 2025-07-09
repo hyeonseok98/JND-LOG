@@ -46,8 +46,7 @@ import MadLife from "@/assets/images/player-profile/sup/sup-매드라이프-defa
 import HeeTae from "@/assets/images/player-profile/sup/sup-이희태-default.webp";
 import CaptainJack from "@/assets/images/player-profile/sup/sup-캡틴잭-default.webp";
 import CrazyCat from "@/assets/images/player-profile/sup/sup-크캣-default.webp";
-
-export type LOL_LINE = "TOP" | "JUNGLE" | "MID" | "AD" | "SUPPORT";
+import { LolLine } from "@/types/draft";
 
 export interface StreamerInfo {
   name: string;
@@ -56,7 +55,7 @@ export interface StreamerInfo {
 }
 
 export interface LineInfo {
-  line: LOL_LINE;
+  line: LolLine;
   icon: StaticImageData;
   members: StreamerInfo[];
 }

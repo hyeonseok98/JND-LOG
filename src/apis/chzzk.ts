@@ -1,4 +1,4 @@
-import resizeThumbnail from "@/app/util/resize-thumbnail";
+import resizeThumbnail from "@/util/resize-thumbnail";
 import axios from "axios";
 import { CHZZK_ENDPOINTS } from "./end-points";
 import apiClient from "./index";

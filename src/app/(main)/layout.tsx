@@ -6,9 +6,9 @@ export default function mainLayout({ children }: PropsWithChildren) {
   return (
     <div className="relative">
       <Header />
-      <div className="flex pt-[60px] h-screen">
+      <div className="flex pt-[64px] h-screen">
         <Sidebar />
-        <main className="flex-1 overflow-auto bg-white">{children}</main>
+        <main className="flex-1 overflow-auto bg-gray-600">{children}</main>
       </div>
     </div>
   );
