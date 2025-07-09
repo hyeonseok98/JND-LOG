@@ -1,6 +1,6 @@
 import { StaticImageData } from "next/image";
 
-export type LolLine = "TOP" | "JUNGLE" | "MID" | "AD" | "SUPPORT";
+export type LolLine = "TOP" | "JG" | "MID" | "AD" | "SUP";
 
 export interface Player {
   id: string;

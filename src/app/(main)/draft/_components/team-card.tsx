@@ -21,7 +21,7 @@ export default function TeamCard({ team }: { team: Team }) {
       <header className="flex justify-between pb-2 border-b border-b-gray-500 text-sm font-semibold">
         <span>{team.name}</span>
         <span className={cn(overBudget ? "text-red-400" : "text-amber-400")}>
-          {team.points} / {team.budget}
+          {team.points} / {team.budget} pt
         </span>
       </header>
 

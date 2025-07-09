@@ -29,7 +29,7 @@ export default function TeamSlotButton({ teamId, line, slot }: TeamSlotButtonPro
       type="button"
       onClick={handle}
       className={cn(
-        "relative w-16 h-16 flex items-center justify-center rounded-md border transition-colors overflow-hidden",
+        "relative w-16 h-16 flex items-center justify-center rounded-md border transition-colors cursor-pointer overflow-hidden",
         slot.player ? "border-emerald-400" : "border-gray-600 hover:border-gray-400",
         isSelected && "ring-2 ring-sky-500",
       )}

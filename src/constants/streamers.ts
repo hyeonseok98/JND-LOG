@@ -1,4 +1,3 @@
-import { LolLine } from "@/types/lol-line";
 import { StaticImageData } from "next/image";
 
 /* ───────── 라인 아이콘 ───────── */
@@ -47,6 +46,7 @@ import MadLife from "@/assets/images/player-profile/sup/sup-매드라이프-defa
 import HeeTae from "@/assets/images/player-profile/sup/sup-이희태-default.webp";
 import CaptainJack from "@/assets/images/player-profile/sup/sup-캡틴잭-default.webp";
 import CrazyCat from "@/assets/images/player-profile/sup/sup-크캣-default.webp";
+import { LolLine } from "@/types/draft";
 
 export interface StreamerInfo {
   name: string;

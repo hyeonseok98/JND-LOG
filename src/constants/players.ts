@@ -1,7 +1,7 @@
 import { LolLine, Player, Slot, Team } from "@/types/draft";
 import { StreamerInfos } from "./streamers";
 
-export const LOL_LINES: LolLine[] = ["TOP", "JUNGLE", "MID", "AD", "SUPPORT"];
+export const LOL_LINES: LolLine[] = ["TOP", "JG", "MID", "AD", "SUP"];
 
 // 선수 풀
 export const PLAYERS: Player[] = StreamerInfos.flatMap(({ line, members }) =>
@@ -26,10 +26,10 @@ const makeTeam = (id: string, junglerName: string, budget: number): Team => {
     points: jungler.cost,
     slots: {
       TOP: empty("TOP"),
-      JUNGLE: { line: "JUNGLE", player: jungler },
+      JG: { line: "JG", player: jungler },
       MID: empty("MID"),
       AD: empty("AD"),
-      SUPPORT: empty("SUPPORT"),
+      SUP: empty("SUP"),
     },
   };
 };
