@@ -35,7 +35,7 @@ export default function Header() {
         <h1 className="font-bold text-xl tracking-tight cursor-pointe whitespace-nowrap">자낳대 LOG</h1>
       </Link>
 
-      <nav className="ml-auto mr-12 flex gap-x-8 font-medium">
+      <nav className="ml-auto mr-20 flex gap-x-8 font-medium">
         {NAV_LISTS.map(({ href, label }) => (
           <Link
             key={href}

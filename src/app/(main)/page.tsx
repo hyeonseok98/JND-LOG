@@ -11,7 +11,6 @@ export default function HomePage() {
   return (
     <SectionLayout>
       <div className="relative flex justify-center items-center w-[1500px] h-screen rounded-md overflow-hidden">
-        {/* 배경 */}
         <Image src={BannerImgSea} alt="메인 배경" fill className="object-cover" priority />
         <div className="absolute inset-0 bg-black/20 backdrop-blur-[2px]" />
 
@@ -19,7 +18,7 @@ export default function HomePage() {
           <Timeline />
         </div>
 
-        <div className="mb-12 text-white text-[90px] font-bold text-center z-10">
+        <div className="mb-16 text-white text-[90px] font-bold text-center z-10">
           <h2 className="text-[90px]">
             자낳대 경매 <br />
           </h2>
