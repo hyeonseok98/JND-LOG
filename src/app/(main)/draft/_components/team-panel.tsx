@@ -2,7 +2,7 @@
 
 import { useDraft } from "@/store/draft";
 import { LolLine } from "@/types/draft";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 function CostRow({ teamId, line, name, cost }: { teamId: string; line: LolLine; name: string; cost: number }) {
   const [value, setValue] = useState(cost);
@@ -44,29 +44,16 @@ export default function TeamPanel() {
   const selectedTeamId = useDraft((s) => s.selectedTeamId);
   const selectedLine = useDraft((s) => s.selectedLine);
   const team = useDraft((s) => s.teams.find((t) => t.id === selectedTeamId));
-  const updateBudget = useDraft((s) => s.updateTeamBudget);
-
-  const [budgetValue, setBudgetValue] = useState(team?.budget ?? 0);
-
-  useEffect(() => {
-    if (team) setBudgetValue(team.budget);
-  }, [team?.id, team?.budget]);
 
   if (!team || selectedLine) {
     return (
       <div className="flex flex-col justify-center items-center h-full gap-6 text-center text-gray-400 text-sm">
         <p>
-          1. 팀 예산을 먼저 설정해 <br />
-          포인트 차등제를 적용하세요.
-          <br />
-          (정글은 팀장입니다)
-        </p>
-        <p>
-          2. 라인 슬롯을 선택한 뒤 <br />
+          1. 라인 슬롯을 선택한 뒤 <br />
           오른쪽에서 선수를 고르세요.
         </p>
         <p>
-          3. 페이지를 새로고침 하면 <br /> 팀이 초기화됩니다.
+          2. 페이지를 새로고침 하면 <br /> 팀이 초기화됩니다.
         </p>
       </div>
     );
@@ -75,23 +62,6 @@ export default function TeamPanel() {
   return (
     <section className="space-y-4 p-4 overflow-y-auto scrollbar-hidden">
       <h3 className="pb-4 text-lg font-semibold text-center">포인트 분배</h3>
-
-      <div className="flex items-center gap-2 text-xs mb-5">
-        <span className="w-14 shrink-0 text-center">총합</span>
-        <span className="flex-1 text-center">-</span>
-        <input
-          type="number"
-          value={budgetValue}
-          min={team.points}
-          max={1000}
-          className="w-20 bg-zinc-800 rounded px-1"
-          onChange={(e) => {
-            const v = Number(e.target.value);
-            setBudgetValue(Math.min(Math.max(v, team.points), 1000));
-          }}
-          onBlur={() => updateBudget(team.id, budgetValue)}
-        />
-      </div>
 
       <div className="flex items-center gap-2 text-xs font-medium text-zinc-400 mb-3">
         <span className="w-14 shrink-0 text-center">라인</span>
