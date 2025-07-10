@@ -35,10 +35,10 @@ const makeTeam = (id: string, junglerName: string, budget: number): Team => {
 };
 
 export const INITIAL_TEAMS: Team[] = [
-  makeTeam("team-gangmam", "갱맘", 1000),
-  makeTeam("team-souruup", "소우릎", 1000),
-  makeTeam("team-ambition", "엠비션", 1000),
-  makeTeam("team-insec", "인섹", 1000),
-  makeTeam("team-cuvee", "큐베", 1000),
+  makeTeam("team-gangmam", "갱맘", 600),
+  makeTeam("team-souruup", "소우릎", 800),
+  makeTeam("team-ambition", "엠비션", 700),
+  makeTeam("team-insec", "인섹", 700),
+  makeTeam("team-cuvee", "큐베", 800),
   makeTeam("team-flame", "플레임", 1000),
 ];

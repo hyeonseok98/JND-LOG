@@ -4,32 +4,33 @@ import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
 
 interface DraftStore {
+  /* ─── 상태 ─── */
   teams: Team[];
   selectedTeamId?: string;
   selectedLine?: LolLine;
 
-  /* 선택 동작 */
+  /* ─── 선택 동작 ─── */
   selectTeam: (id: string) => void;
   selectSlot: (teamId: string, line: LolLine) => void;
 
-  /* 팀/선수 편집 동작 */
+  /* ─── 편집 동작 ─── */
   addPlayerToTeam: (teamId: string, playerId: string) => void;
   removePlayerFromTeam: (teamId: string, line: LolLine) => void;
   updatePlayerCost: (teamId: string, line: LolLine, cost: number) => void;
-  updateTeamBudget: (teamId: string, budget: number) => void;
 }
 
 export const useDraft = create<DraftStore>()(
   immer((set) => ({
     teams: INITIAL_TEAMS,
 
-    // 선택
+    /* ─── 팀 선택 ─── */
     selectTeam: (id) =>
       set((s) => {
         s.selectedTeamId = id;
         s.selectedLine = undefined; // 기존 라인 선택 해제
       }),
 
+    /* ─── 슬롯(라인) 선택 ─── */
     selectSlot: (teamId, line) =>
       set((s) => {
         s.selectedTeamId = teamId;
@@ -37,7 +38,7 @@ export const useDraft = create<DraftStore>()(
         s.selectedLine = s.selectedTeamId === teamId && s.selectedLine === line ? undefined : line;
       }),
 
-    // 선수 배치
+    /* ─── 선수 배치 ─── */
     addPlayerToTeam: (teamId, playerId) =>
       set((s) => {
         const team = s.teams.find((t) => t.id === teamId);
@@ -60,7 +61,7 @@ export const useDraft = create<DraftStore>()(
         s.selectedLine = undefined;
       }),
 
-    // 선수 제거
+    /* ─── 선수 제거 ─── */
     removePlayerFromTeam: (teamId, line) =>
       set((s) => {
         const team = s.teams.find((t) => t.id === teamId);
@@ -73,7 +74,7 @@ export const useDraft = create<DraftStore>()(
         s.selectedLine = undefined;
       }),
 
-    // 선수 포인트 수정
+    /* ─── 선수 포인트 수정 ─── */
     updatePlayerCost: (teamId, line, cost) =>
       set((s) => {
         /* 정글(팀장)은 수정 불가 */
@@ -90,17 +91,6 @@ export const useDraft = create<DraftStore>()(
 
         slot.player.cost = cost;
         team.points = projected;
-      }),
-
-    //팀 예산(총합) 수정
-    updateTeamBudget: (teamId, budget) =>
-      set((s) => {
-        const team = s.teams.find((t) => t.id === teamId);
-        if (!team) return;
-        /* 현재 사용 포인트보다 작은 예산은 허용하지 않음 */
-        if (budget < team.points) return;
-
-        team.budget = budget;
       }),
   })),
 );

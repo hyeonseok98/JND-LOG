@@ -6,10 +6,10 @@ import TeamPanel from "./_components/team-panel";
 export default function DraftPage() {
   return (
     <SectionLayout>
-      <section className="flex h-screen bg-zinc-950 text-white">
+      <section className="flex h-screen bg-gray-800 text-white">
         <TeamsBoard />
 
-        <div className="w-[240px] border-x border-zinc-800">
+        <div className="w-[240px] border-x border-gray-500">
           <TeamPanel />
         </div>
 
