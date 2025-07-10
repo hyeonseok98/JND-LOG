@@ -2,7 +2,10 @@
 
 import CatLoading from "@/assets/lottie/cat-loading.json";
 import ColorfulLoading from "@/assets/lottie/colorful-loading.json";
-import { Player } from "@lottiefiles/react-lottie-player";
+import dynamic from "next/dynamic";
+
+// lottie는 client 전용이기에, ssr에서 실행 방지
+const LottiePlayer = dynamic(() => import("@lottiefiles/react-lottie-player").then((m) => m.Player), { ssr: false });
 
 type LottieType = "cat" | "colorful";
 
@@ -22,7 +25,7 @@ export default function LottieLoader({
   const animationData = type === "cat" ? CatLoading : ColorfulLoading;
 
   return (
-    <Player
+    <LottiePlayer
       src={animationData}
       autoplay={autoplay}
       loop={loop}
