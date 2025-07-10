@@ -20,6 +20,9 @@ const hansansBold = localFont({
 export const metadata: Metadata = {
   title: "자낳대 LOG",
   description: "자낳대를 더 깊이 즐길 수 있는 기록 모음 팬사이트입니다.",
+  icons: {
+    icon: "/logo/wave.png",
+  },
 };
 
 export default function RootLayout({

@@ -9,6 +9,7 @@ export default function TeamCard({ team }: { team: Team }) {
   const selectTeam = useDraft((s) => s.selectTeam);
 
   const overBudget = team.points > team.budget;
+  const remainingPoints = team.budget - team.points;
 
   return (
     <article
@@ -19,9 +20,12 @@ export default function TeamCard({ team }: { team: Team }) {
       )}
     >
       <header className="flex justify-between pb-2 border-b border-b-gray-500 text-sm font-semibold">
-        <span>{team.name}</span>
-        <span className={cn(overBudget ? "text-red-400" : "text-amber-400")}>
-          {team.points} / {team.budget} pt
+        <span>
+          {team.name} <span className="text-amber-400"> ({team.budget}pt)</span>
+        </span>
+        <span>
+          잔여 포인트:
+          <span className={cn(overBudget ? "text-red-400" : "text-amber-400", "pl-1")}> {remainingPoints} pt</span>
         </span>
       </header>
 

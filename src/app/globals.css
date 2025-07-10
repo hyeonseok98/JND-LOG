@@ -153,3 +153,30 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* 물결 css */
+@keyframes waveClip {
+  0%,
+  100% {
+    clip-path: polygon(0% 45%, 16% 44%, 33% 50%, 54% 60%, 70% 61%, 84% 59%, 100% 52%, 100% 100%, 0% 100%);
+  }
+  50% {
+    clip-path: polygon(0% 60%, 15% 65%, 34% 66%, 51% 62%, 67% 50%, 84% 45%, 100% 46%, 100% 100%, 0% 100%);
+  }
+}
+
+.wave-text {
+  position: relative;
+  display: inline-block;
+  color: transparent;
+  -webkit-text-stroke: 2px #ffffff;
+  font-weight: 700;
+}
+
+.wave-text::before {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  color: #3ec6ff;
+  animation: waveClip 4s ease-in-out infinite;
+}

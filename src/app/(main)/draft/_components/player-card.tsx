@@ -25,10 +25,9 @@ export default function PlayerCard({ player, disabled, onPick }: PlayerCardProps
         height={56}
         className="w-14 h-14 rounded-full object-cover"
       />
-      <span className="text-[10px] leading-tight text-center">
+      <span className="text-xs leading-tight text-center pt-1.5">
         {player.name}
         <br />
-        <span className="text-emerald-400">{player.cost}</span>
       </span>
     </button>
   );

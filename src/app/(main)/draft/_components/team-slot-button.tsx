@@ -38,7 +38,7 @@ export default function TeamSlotButton({ teamId, line, slot }: TeamSlotButtonPro
         <>
           <Image src={slot.player.avatar} alt={slot.player.name} sizes="64px" className="w-16 h-16 object-cover" />
           <span className="absolute bottom-0 w-full text-[9px] text-center bg-black/60">
-            {slot.player.name} · {slot.player.cost}
+            {line === "JG" ? slot.player.name : `${slot.player.name} · ${slot.player.cost}`}
           </span>
         </>
       ) : (
