@@ -122,3 +122,11 @@ export const StreamerInfos: LineInfo[] = [
     ],
   },
 ];
+
+export const LINE_ICONS: Record<LolLine, StaticImageData> = {
+  TOP: iconTop,
+  JG: iconJungle,
+  MID: iconMid,
+  AD: iconAd,
+  SUP: iconSupport,
+};

@@ -10,6 +10,7 @@ import { usePathname } from "next/navigation";
 const NAV_LISTS = [
   { href: "/", label: "홈" },
   { href: "/draft", label: "경매" },
+  { href: "/mock-draft", label: "모의경매" },
   { href: "/matches", label: "경기기록" },
   { href: "/update", label: "업데이트" },
 ];
