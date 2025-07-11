@@ -6,11 +6,15 @@ import { useEffect, useState } from "react";
 const TARGET = "2025-07-12T18:00:00+09:00";
 
 export default function Countdown() {
-  const [left, setLeft] = useState<TimeLeft>(() => getTimeLeft(TARGET));
+  // 서버와 클라 모두 동일한 값(0)으로 시작 → 문자열 불일치 방지
+  const [left, setLeft] = useState<TimeLeft>({ days: 0, hours: 0, minutes: 0, seconds: 0 });
 
+  // 마운트 후에만 실제 남은 시간 계산
   useEffect(() => {
-    setLeft(getTimeLeft(TARGET));
-    const id = setInterval(() => setLeft(getTimeLeft(TARGET)), 1000);
+    const update = () => setLeft(getTimeLeft(TARGET));
+    update(); // 첫 값 즉시 채우기
+    const id = setInterval(update, 1000);
+
     return () => clearInterval(id);
   }, []);
 
@@ -27,6 +31,7 @@ export default function Countdown() {
         <Divider />
         <Block label="SECONDS" value={pad(left.seconds)} />
       </div>
+
       <p className="mt-2 text-sm text-gray-300 tracking-wide">자낳대 경매일&nbsp;:&nbsp;2025-07-12(토)&nbsp;18:00</p>
     </div>
   );
