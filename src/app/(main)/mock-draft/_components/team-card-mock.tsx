@@ -24,7 +24,7 @@ export default function TeamCardMock({ team }: { team: Team }) {
           {team.name} <span className="text-amber-400">({team.budget}pt)</span>
         </span>
         <span className="text-white">
-          잔여{" "}
+          잔여
           <span className={team.points > team.budget ? "text-red-400" : "text-amber-400"}>
             {team.budget - team.points}
           </span>
