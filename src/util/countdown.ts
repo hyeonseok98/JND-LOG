@@ -34,13 +34,11 @@ export function getTimeLeft(targetDate: string): TimeLeft {
 
  */
 export function getDDay(targetDate: string): string {
-  const today = dayjs().startOf("day");
-  const target = dayjs(targetDate).startOf("day");
+  const ZONE = "Asia/Seoul";
+
+  const today = dayjs().tz(ZONE).startOf("day");
+  const target = dayjs(targetDate).tz(ZONE).startOf("day");
+
   const diff = target.diff(today, "day");
-
-  if (diff <= 0) {
-    return "D-DAY";
-  }
-
-  return `D-${diff}`;
+  return diff <= 0 ? "D-DAY" : `D-${diff}`;
 }
