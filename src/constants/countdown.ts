@@ -1,0 +1,1 @@
+export const TARGET_TIME = "2025-07-16T18:00:00+09:00";

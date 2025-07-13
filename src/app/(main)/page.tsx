@@ -1,12 +1,13 @@
 import BannerImgSea from "@/assets/images/banners/banner-sea.jpg";
 import { SectionLayout } from "@/components/layout";
+import { TARGET_TIME } from "@/constants/countdown";
 import { getDDay } from "@/util/countdown";
 import Image from "next/image";
 import Countdown from "./_components/countdown";
 import Timeline from "./_components/time-line";
 
 export default function HomePage() {
-  const ddayText = getDDay("2025-07-12T18:00:00+09:00");
+  const ddayText = getDDay(TARGET_TIME);
 
   return (
     <SectionLayout>
