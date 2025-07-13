@@ -12,7 +12,7 @@ const NAV_LISTS = [
   { href: "/draft", label: "경매" },
   { href: "/mock-draft", label: "모의경매" },
   { href: "/matches", label: "경기기록" },
-  { href: "/update", label: "업데이트" },
+  { href: "/news", label: "소식" },
 ];
 
 export default function Header() {

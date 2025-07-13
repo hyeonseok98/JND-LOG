@@ -1,9 +1,8 @@
 "use client";
 
+import { TARGET_TIME } from "@/constants/countdown";
 import { getTimeLeft, TimeLeft } from "@/util/countdown";
 import { useEffect, useState } from "react";
-
-const TARGET = "2025-07-12T18:00:00+09:00";
 
 export default function Countdown() {
   // 서버와 클라 모두 동일한 값(0)으로 시작 → 문자열 불일치 방지
@@ -11,7 +10,7 @@ export default function Countdown() {
 
   // 마운트 후에만 실제 남은 시간 계산
   useEffect(() => {
-    const update = () => setLeft(getTimeLeft(TARGET));
+    const update = () => setLeft(getTimeLeft(TARGET_TIME));
     update(); // 첫 값 즉시 채우기
     const id = setInterval(update, 1000);
 
@@ -32,7 +31,9 @@ export default function Countdown() {
         <Block label="SECONDS" value={pad(left.seconds)} />
       </div>
 
-      <p className="mt-2 text-sm text-gray-300 tracking-wide">자낳대 경매일&nbsp;:&nbsp;2025-07-12(토)&nbsp;18:00</p>
+      <p className="mt-2 text-sm text-gray-300 tracking-wide">
+        3팀 2조 풀리그(예선)&nbsp;:&nbsp;2025-07-16(수)&nbsp;18:00
+      </p>
     </div>
   );
 }

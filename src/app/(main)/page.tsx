@@ -1,12 +1,13 @@
 import BannerImgSea from "@/assets/images/banners/banner-sea.jpg";
 import { SectionLayout } from "@/components/layout";
+import { TARGET_TIME } from "@/constants/countdown";
 import { getDDay } from "@/util/countdown";
 import Image from "next/image";
 import Countdown from "./_components/countdown";
 import Timeline from "./_components/time-line";
 
 export default function HomePage() {
-  const ddayText = getDDay("2025-07-12T18:00:00+09:00");
+  const ddayText = getDDay(TARGET_TIME);
 
   return (
     <SectionLayout>
@@ -20,7 +21,7 @@ export default function HomePage() {
 
         <div className="mb-16 text-white text-[90px] font-bold text-center z-10">
           <h2 className="text-[90px]">
-            자낳대 경매 <br />
+            조별 리그 <br />
           </h2>
           <span className="wave-text" data-text={ddayText}>
             {ddayText}
