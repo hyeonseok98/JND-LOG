@@ -21,7 +21,7 @@ export default function HomePage() {
 
         <div className="mb-16 text-white text-[90px] font-bold text-center z-10">
           <h2 className="text-[90px]">
-            자낳대 경매 <br />
+            조별 리그 <br />
           </h2>
           <span className="wave-text" data-text={ddayText}>
             {ddayText}

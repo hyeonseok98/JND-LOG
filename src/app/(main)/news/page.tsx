@@ -1,7 +1,7 @@
 import { SectionLayout } from "@/components/layout";
 import LottieLoader from "@/components/lottie/lottie-loader";
 
-export default function UpdatePage() {
+export default function NewsPage() {
   return (
     <SectionLayout>
       <div className="flex flex-col justify-center items-center w-[1500px] h-screen gap-8 text-gray-300 border border-gray-300 rounded-md">
