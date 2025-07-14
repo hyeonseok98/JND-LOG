@@ -1,34 +1,30 @@
-import apiClient from "@/apis";
-import { GOOGLE_ENDPOINTS } from "@/apis/end-points";
+"use client";
+
+import { getPlayers, getPlayersRaw } from "@/apis/matches";
 import { QUERY_KEYS } from "@/constants/query-key";
-import { PlayerRow } from "@/types/lol/players";
-import { toNumber } from "@/util/number";
+import type { PlayerRow } from "@/types/lol/players";
 import { useQuery } from "@tanstack/react-query";
 
-export function usePlayers() {
+/**
+ * matchId 로 players_raw 가져오기
+ */
+export function usePlayersByMatch(matchId: string) {
   return useQuery<PlayerRow[]>({
-    queryKey: QUERY_KEYS.GOOGLE_SHEET.PLAYERS,
-    queryFn: async () => {
-      const { data } = await apiClient.get<PlayerRow[]>(GOOGLE_ENDPOINTS.PLAYERS);
+    queryKey: QUERY_KEYS.GOOGLE_SHEET.PLAYERS(matchId),
+    queryFn: () => getPlayers({ matchId }),
+    enabled: !!matchId,
+    staleTime: 5 * 60000,
+  });
+}
 
-      return data.map((r: any) => ({
-        ...r,
-        win: toNumber(r.win),
-        kill: toNumber(r.kill),
-        death: toNumber(r.death),
-        assist: toNumber(r.assist),
-        cs: toNumber(r.cs),
-        gold: toNumber(r.gold),
-        dmg: toNumber(r.dmg),
-        KDA: toNumber(r.KDA),
-        KP: toNumber(r.KP),
-        DPM: toNumber(r.DPM),
-        DPG: toNumber(r.DPG),
-        DMGpct: toNumber(r["DMG%"] ?? r.DMGpct),
-        GPM: toNumber(r.GPM),
-        GOLDpct: toNumber(r["GOLD%"] ?? r.GOLDpct),
-      }));
-    },
-    staleTime: 10 * 60 * 1000,
+/**
+ * 전체 players_raw (필터 없음)
+ */
+export function useAllPlayersRaw(initialData?: PlayerRow[]) {
+  return useQuery<PlayerRow[]>({
+    queryKey: QUERY_KEYS.GOOGLE_SHEET.PLAYERS(), // ["players", undefined]
+    queryFn: () => getPlayersRaw(),
+    initialData,
+    staleTime: 5 * 60000,
   });
 }

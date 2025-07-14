@@ -1,12 +1,18 @@
 export interface PlayerRow {
+  /* 기본키 */
   matchId: string;
   playerId: string;
-  playerName: string;
-  side: string;
-  role: string;
-  champion: string;
-  type: string;
 
+  /* 프로필 */
+  playerName: string;
+  side: "BLUE" | "RED";
+  role: "TOP" | "JG" | "MID" | "AD" | "SUP";
+  champion: string;
+
+  /* 구분 */
+  type: "내전" | "공식스크림" | "비공식스크림";
+
+  /* 원-데이터 */
   win: number | null;
   kill: number | null;
   death: number | null;
@@ -15,11 +21,12 @@ export interface PlayerRow {
   gold: number | null;
   dmg: number | null;
 
+  /* 계산 필드 */
   KDA: number | null;
-  KP: number | null; // 시트에 KP 라는 헤더
+  KP: number | null; // kill participation
   DPM: number | null;
   DPG: number | null;
-  DMGpct: number | null; // 시트 헤더: DMG%
+  DMGpct: number | null;
   GPM: number | null;
-  GOLDpct: number | null; // 시트 헤더: GOLD%
+  GOLDpct: number | null;
 }

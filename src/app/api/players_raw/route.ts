@@ -1,34 +1,31 @@
-// src/app/api/matches/route.ts
 export const runtime = "nodejs";
 
 import { sheetsClient, SPREADSHEET_ID } from "@/lib/sheets";
 import { NextResponse } from "next/server";
 
+/**
+ * matchId별로 파싱해서 players_raw 값을 가져옴
+ */
 export async function GET(req: Request) {
-  /* 1) date 파라미터 추출 */
   const { searchParams } = new URL(req.url);
-  const date = searchParams.get("date"); // YYYY-MM-DD
+  const matchId = searchParams.get("matchId");
 
-  /* 2) 시트 읽기 */
   const { data } = await sheetsClient.spreadsheets.values.get({
     spreadsheetId: SPREADSHEET_ID,
-    range: "matches!A1:R",
+    range: "players_raw!A1:L",
     valueRenderOption: "UNFORMATTED_VALUE",
   });
 
-  /* 3) 헤더 & rows → 객체 배열 */
   const [header, ...rows] = data.values ?? [];
   let json = rows.map((r) =>
-    header.reduce<Record<string, unknown>>((o, key, i) => {
-      o[key as string] = r[i] ?? null;
+    header.reduce<Record<string, unknown>>((o, key, idx) => {
+      o[key as string] = r[idx] ?? null;
       return o;
     }, {}),
   );
 
-  /* 4) 날짜 필터(선택) */
-  if (date) json = json.filter((m) => m.date === date);
+  if (matchId) json = json.filter((p) => p.matchId === matchId);
 
-  /* 5) 응답 */
   return NextResponse.json(json, {
     headers: { "Cache-Control": "public, max-age=0, s-maxage=600" },
   });

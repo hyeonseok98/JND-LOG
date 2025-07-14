@@ -5,5 +5,5 @@ export interface MatchRow {
   blueTeam: string;
   redTeam: string;
   winner: string;
-  type: string;
+  type: "내전" | "공식스크림" | "비공식스크림";
 }

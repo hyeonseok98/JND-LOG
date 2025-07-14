@@ -4,8 +4,9 @@ export const QUERY_KEYS = {
     LIVE_DETAILS: (channelIds: string[]) => ["chzzk", "LiveDetails", ...channelIds] as const,
   },
   GOOGLE_SHEET: {
-    PLAYERS: ["players"] as const,
-    MATCHES: ["matches"] as const,
-    TEAMS: ["teams"] as const,
+    PLAYERS: (matchId?: string) => ["players", matchId] as const,
+    MATCHES: (type?: string) => ["matches", type ?? "전체"] as const,
+    MATCHES_BY_DATE: (date?: string) => ["matches", date] as const,
+    TEAMS: (team: string) => ["teams", team] as const,
   },
 };

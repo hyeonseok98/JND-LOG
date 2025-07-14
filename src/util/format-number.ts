@@ -13,3 +13,8 @@ export const toNumber = (v: unknown) => {
  */
 export const formatNumber = (v: number | null | undefined, d = 0) =>
   v === null || v === undefined ? "-" : v.toFixed(d);
+
+export const formatDuration = (sec: number | null) => {
+  if (!sec) return "-";
+  return (sec / 60).toFixed(1);
+};
