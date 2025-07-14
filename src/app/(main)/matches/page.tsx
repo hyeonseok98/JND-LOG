@@ -6,8 +6,6 @@ import { fetchMatchesByDate } from "./_services/matches";
 export default async function MatchesPage() {
   const matchesByDate = await fetchMatchesByDate();
 
-  console.log(matchesByDate);
-
   return (
     <div className="mx-auto max-w-5xl space-y-8 p-6">
       <h1 className="text-2xl font-bold text-white">경기 기록</h1>
@@ -22,9 +20,17 @@ export default async function MatchesPage() {
                 <AccordionTrigger className="flex items-center justify-between gap-4 px-4 py-3 text-white">
                   <div className="flex items-center gap-3">
                     <TypeBadge value={m.type as BadgeType} />
-                    <span className="font-medium truncate">
-                      {m.headerBlue} 팀({m.bluePlayers})<span className="mx-1 text-muted-foreground">vs</span>
-                      {m.headerRed} 팀({m.redPlayers})
+
+                    <span className="font-medium truncate space-x-1">
+                      {/* BLUE 쪽  ─ 승리 시 파란색   */}
+                      <span className={m.winner === m.headerBlue ? "text-sky-400" : undefined}>{m.headerBlue} 팀</span>
+                      <span className="hidden md:inline">({m.bluePlayers})</span>
+
+                      <span className="mx-1 text-muted-foreground">vs</span>
+
+                      {/* RED  쪽  ─ 승리 시 빨간색   */}
+                      <span className={m.winner === m.headerRed ? "text-rose-400" : undefined}>{m.headerRed} 팀</span>
+                      <span className="hidden md:inline">({m.redPlayers})</span>
                     </span>
                   </div>
                 </AccordionTrigger>
