@@ -1,6 +1,7 @@
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import dayjs from "dayjs";
 import { BadgeType, TypeBadge } from "./_components/badge";
+import Scoreboard from "./_components/score-board";
 import { fetchMatchesByDate } from "./_services/matches";
 
 export default async function MatchesPage() {
@@ -36,7 +37,12 @@ export default async function MatchesPage() {
                 </AccordionTrigger>
 
                 <AccordionContent className="bg-muted/20 px-4 py-3 text-sm italic text-muted-foreground">
-                  경기 상세 준비 중…
+                  <Scoreboard
+                    matchId={m.matchId}
+                    winner={m.winner as "BLUE" | "RED"}
+                    headerBlue={m.headerBlue}
+                    headerRed={m.headerRed}
+                  />
                 </AccordionContent>
               </AccordionItem>
             ))}

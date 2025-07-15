@@ -5,8 +5,10 @@ export const QUERY_KEYS = {
   },
   GOOGLE_SHEET: {
     PLAYERS: (matchId?: string) => ["players", matchId] as const,
+    PLAYERS_STATS: (matchId: string) => ["playerStats", matchId] as const,
     MATCHES: (type?: string) => ["matches", type ?? "전체"] as const,
     MATCHES_BY_DATE: (date?: string) => ["matches", date] as const,
     TEAMS: (team: string) => ["teams", team] as const,
+    CHAMPIONS: () => ["champions"],
   },
 };
