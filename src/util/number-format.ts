@@ -14,6 +14,16 @@ export const toNumber = (v: unknown) => {
 export const formatNumber = (v: number | null | undefined, d = 0) =>
   v === null || v === undefined ? "-" : v.toFixed(d);
 
+/**
+ * @returns 예시) 1.0k처럼 1000의 단위를 k로 분리
+ */
+export const kFormat = (n: number | null | undefined): string => {
+  if (n == null || n == undefined) {
+    return "0";
+  }
+  return n >= 1000 ? `${(n / 1000).toFixed(1)}k` : n.toString();
+};
+
 export const formatDuration = (sec: number | null) => {
   if (!sec) return "-";
   return (sec / 60).toFixed(1);

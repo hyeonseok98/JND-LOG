@@ -29,6 +29,6 @@ export function useMatchesByDate(date: string, initialData?: MatchRow[]) {
     queryFn: () => getMatchesByDate(date),
     initialData,
     enabled: !!date, // date 가 주어졌을 때만 실행
-    staleTime: 5 * 60_000,
+    staleTime: 5 * 60000,
   });
 }

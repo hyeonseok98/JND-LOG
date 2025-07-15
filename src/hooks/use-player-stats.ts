@@ -1,6 +1,6 @@
-import apiClient from "@/apis"; // axios instance
-import { GOOGLE_ENDPOINTS } from "@/apis/end-points";
+import { fetchPlayerStats, fetchPlayerSummary } from "@/apis/players";
 import { QUERY_KEYS } from "@/constants/query-key";
+import { Mode } from "@/types/lol/players";
 import { useQuery } from "@tanstack/react-query";
 
 export interface PlayerStatRow {
@@ -10,16 +10,19 @@ export interface PlayerStatRow {
   side: "BLUE" | "RED";
   role: "TOP" | "JG" | "MID" | "AD" | "SUP";
   champion: string;
+  type: string;
   kill: number;
   death: number;
   assist: number;
+  gold: number;
+  dmg: number;
   KDA: number;
   KP: number;
-}
-
-async function fetchPlayerStats(matchId: string) {
-  const { data } = await apiClient.get<PlayerStatRow[]>(GOOGLE_ENDPOINTS.PLAYERS_STATS, { params: { matchId } });
-  return data;
+  DPM: number;
+  DPG: number;
+  "DMG%": number;
+  GPM: number;
+  "GOLD%": number;
 }
 
 export function usePlayerStats(matchId: string) {
@@ -28,5 +31,14 @@ export function usePlayerStats(matchId: string) {
     queryFn: () => fetchPlayerStats(matchId),
     enabled: !!matchId,
     staleTime: 5 * 60000,
+  });
+}
+
+export function usePlayerSummary(mode: Mode, playerId?: string) {
+  return useQuery({
+    queryKey: QUERY_KEYS.GOOGLE_SHEET.PLAYERS_SUMMARY(mode, playerId),
+    queryFn: () => fetchPlayerSummary(mode, playerId),
+    enabled: !!mode,
+    staleTime: 5 * 60_000,
   });
 }

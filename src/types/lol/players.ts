@@ -1,3 +1,4 @@
+export type Mode = "내전" | "공식스크림" | "비공식스크림";
 export interface PlayerRow {
   /* 기본키 */
   matchId: string;
@@ -29,4 +30,19 @@ export interface PlayerRow {
   DMGpct: number | null;
   GPM: number | null;
   GOLDpct: number | null;
+}
+
+export interface PlayerSummaryRow {
+  playerId: string;
+  playerName: string;
+  games: number;
+  wins: number;
+  winRate: number;
+  avgKDA: number;
+  avgKP: number;
+  avgDPM: number;
+  avgDPG: number;
+  "avgDMG%": number;
+  avgGPM: number;
+  "avgGOLD%": number;
 }

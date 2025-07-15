@@ -1,5 +1,5 @@
 import { PlayerRow } from "@/types/lol/players";
-import { toNumber } from "./format-number";
+import { toNumber } from "./number-format";
 
 /**
  * 공통 정규화 함수

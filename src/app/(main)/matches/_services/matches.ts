@@ -1,4 +1,5 @@
-import { getMatches, getPlayersRaw } from "@/apis/matches";
+import { getMatches } from "@/apis/matches";
+import { getPlayersRaw } from "@/apis/players";
 import type { MatchRow } from "@/types/lol/matches";
 import { groupBy } from "@/util/group-by";
 import dayjs from "dayjs";
