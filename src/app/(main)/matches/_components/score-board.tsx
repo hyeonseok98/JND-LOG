@@ -1,6 +1,7 @@
 "use client";
 
 import Avatar from "@/components/ui/avatar";
+import Skeleton from "@/components/ui/skeleton";
 import { LOL_LINES } from "@/constants/players";
 import { RIOT_CDN_VERSION, useChampionDict } from "@/hooks/use-champion-dict";
 import { PlayerStatRow, usePlayerStats } from "@/hooks/use-player-stats";
@@ -42,10 +43,15 @@ interface ScoreboardProps {
   headerBlue: string;
   headerRed: string;
 }
-export default function Scoreboard({ matchId, winner, headerBlue, headerRed }: ScoreboardProps) {
-  const { data: stats } = usePlayerStats(matchId);
-  const { data: champDict } = useChampionDict();
 
+export default function Scoreboard({ matchId, winner, headerBlue, headerRed }: ScoreboardProps) {
+  const { data: stats, isLoading: statsLoading } = usePlayerStats(matchId);
+  const { data: champDict, isLoading: champLoading } = useChampionDict();
+  const isLoading = statsLoading || champLoading;
+
+  if (isLoading) {
+    return <Skeleton rows={3} />;
+  }
   if (!stats || !champDict) return null;
 
   /* 진영·라인별 5명 */
