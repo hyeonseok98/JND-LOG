@@ -40,6 +40,7 @@ export function useTeamSummary(type: string) {
     staleTime: 10 * 60000,
   });
 }
+
 export function useChampSummary(type: string) {
   return useQuery({
     queryKey: QUERY_KEYS.GOOGLE_SHEET.CHAMP_SUMMARY(type),

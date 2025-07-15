@@ -5,6 +5,7 @@ import { usePrefetchPlayerStats } from "@/hooks/use-prefetch-player-stats";
 import dayjs from "dayjs";
 import { BadgeType, TypeBadge } from "./badge";
 import Scoreboard from "./score-board";
+import TeamSummaryPanel from "./team-summary_panel";
 
 /** 서버에서 받아온 초기 데이터를 그대로 props 로 받음 */
 interface ClientMatchesProps {
@@ -34,7 +35,7 @@ export default function ClientMatches({ initialData }: ClientMatchesProps) {
   return (
     <>
       <h1 className="text-2xl font-bold text-white">경기 기록</h1>
-
+      <TeamSummaryPanel />
       {initialData.map(([date, matches]) => (
         <section key={date} className="space-y-4">
           <h2 className="text-lg font-semibold text-white">
@@ -49,7 +50,7 @@ export default function ClientMatches({ initialData }: ClientMatchesProps) {
 
               return (
                 <AccordionItem key={m.matchId} value={m.matchId} ref={prefetchRef} className="rounded-md border">
-                  <AccordionTrigger className="flex items-center justify-between gap-4 px-4 py-3 text-white">
+                  <AccordionTrigger className="flex items-center justify-between gap-4 px-4 py-3 text-white cursor-pointer hover:no-underline">
                     <div className="flex items-center gap-3">
                       <TypeBadge value={m.type as BadgeType} />
 

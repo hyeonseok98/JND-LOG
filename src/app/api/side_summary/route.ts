@@ -6,7 +6,7 @@ export async function GET(req: Request) {
   const matchType = searchParams.get("type");
 
   let json = await fetchSheetAsJson("side_summary!A1:Z");
-  if (matchType) json = json.filter((r) => r.playerId === matchType);
+  if (matchType) json = json.filter((r) => r.type === matchType);
 
   return NextResponse.json(json, {
     headers: { "Cache-Control": "public, max-age=0, s-maxage=600" },

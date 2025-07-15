@@ -1,6 +1,6 @@
 "use client";
 
-import { getPlayers, getPlayersRaw } from "@/apis/matches";
+import { getPlayers, getPlayersRaw } from "@/apis/players";
 import { QUERY_KEYS } from "@/constants/query-key";
 import type { PlayerRow } from "@/types/lol/players";
 import { useQuery } from "@tanstack/react-query";

@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import ClientMatches from "./_components/client-matches";
 import { fetchMatchesByDate } from "./_services/matches";
 
