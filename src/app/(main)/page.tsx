@@ -1,3 +1,5 @@
+export const revalidate = 60;
+
 import BannerImgSea from "@/assets/images/banners/banner-sea.jpg";
 import { SectionLayout } from "@/components/layout";
 import { TARGET_TIME } from "@/constants/countdown";

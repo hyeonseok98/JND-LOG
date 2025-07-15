@@ -10,10 +10,19 @@ export interface AvatarProps {
 export default function Avatar({ src, alt = "profile image", size = 32, isLive = false }: AvatarProps) {
   return (
     <div
-      className={`relative rounded-full overflow-hidden ${isLive ? "ring-2 ring-green-500" : "ring-1 ring-gray-400"}`}
+      className={`relative rounded-full overflow-hidden bg-gray-300 ${
+        isLive ? "ring-2 ring-green-500" : "ring-1 ring-gray-400"
+      }`}
       style={{ width: size, height: size }}
     >
-      <Image src={src} alt={alt} fill sizes={`${size}px`} priority className="rounded-full object-cover" />
+      <Image
+        src={src || "/logo/wave.png"}
+        alt={alt}
+        fill
+        sizes={`${size}px`}
+        priority
+        className="rounded-full object-cover"
+      />
     </div>
   );
 }
