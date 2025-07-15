@@ -1,4 +1,4 @@
-export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
 
 import { sheetsClient, SPREADSHEET_ID } from "@/lib/sheets";
 import { NextResponse } from "next/server";
