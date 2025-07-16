@@ -7,7 +7,8 @@ import Image from "next/image";
 import Link from "next/link";
 
 const MAIN_STREAME: { id: string; name: string; avatar: StaticImageData }[] = [
-  { id: "22bd842599735ae19e454983280f611e", name: "인첸트", avatar: "/logo/pig.png" as unknown as StaticImageData },
+  { id: "22bd842599735ae19e454983280f611e", name: "인첸트A", avatar: "/logo/pig.png" as unknown as StaticImageData },
+  { id: "a53ae259f77b730616f8b533aeac8bee", name: "인첸트B", avatar: "/logo/pig.png" as unknown as StaticImageData },
   { id: "560651bcf90a9399dbe79c6bd2ebbf0e", name: "포니", avatar: "/logo/pig.png" as unknown as StaticImageData },
   { id: "368ca51e82c85583e059fe669ef0f028", name: "김정민", avatar: "/logo/pig.png" as unknown as StaticImageData },
 ];
@@ -18,7 +19,7 @@ export default function LiveChzzkList() {
   if (!data) return null;
 
   return (
-    <div className="grid gap-4 xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 w-full">
+    <div className="grid gap-4 xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 w-full">
       {MAIN_STREAME.map(({ id, name, avatar }) => {
         const { thumbnail, isLive, title } = data[id] ?? {};
 
@@ -30,7 +31,6 @@ export default function LiveChzzkList() {
             rel="noopener noreferrer"
             className="block"
           >
-            {/* 썸네일 */}
             <div className="relative w-full aspect-[16/9] rounded-lg overflow-hidden">
               {thumbnail ? (
                 <Image src={thumbnail} alt={title ?? ""} fill className="object-cover" />
@@ -44,8 +44,7 @@ export default function LiveChzzkList() {
               )}
             </div>
 
-            {/* 프로필 + 제목 */}
-            <div className="flex items-center gap-2 mt-2">
+            <div className="flex items-center gap-2 mt-3">
               <Avatar src={avatar} isLive={isLive} size={30} />
               <div className="flex-1">
                 {title && <p className="text-sm font-medium text-gray-200 line-clamp-2">{title}</p>}

@@ -47,7 +47,7 @@ export default function HomePage() {
         <LiveChzzkList />
       </section>
 
-      <section className="max-w-[1500px] w-full py-15 px-10">
+      <section className="max-w-[1500px] w-full py-14 px-10">
         <h3 className="text-2xl text-white font-bold mb-2">📢 팀별 중계 & 프로필</h3>
         <TeamLiveChzzkList />
       </section>
