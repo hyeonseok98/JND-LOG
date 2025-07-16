@@ -1,4 +1,4 @@
-import apiClient from "@/apis";
+import { apiClient } from "@/apis";
 import { GOOGLE_ENDPOINTS } from "@/apis/end-points";
 import { getMatchesByDate } from "@/apis/matches";
 import { QUERY_KEYS } from "@/constants/query-key";

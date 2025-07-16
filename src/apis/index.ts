@@ -1,13 +1,19 @@
 import axios from "axios";
 
-export const API_BASE_URL = process.env.NEXT_PUBLIC_LOCAL_URL || process.env.NEXT_PUBLIC_VERCEL_URL;
+const isServer = typeof window === "undefined";
+
+function getBaseURL() {
+  if (isServer) {
+    if (process.env.NODE_ENV === "development") return "http://localhost:3000";
+
+    if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`;
+  }
+
+  return "";
+}
 
 export const apiClient = axios.create({
-  baseURL: API_BASE_URL,
-  timeout: 15000,
-  headers: {
-    "Content-Type": "application/json",
-  },
+  baseURL: getBaseURL(),
+  timeout: 15_000,
+  headers: { "Content-Type": "application/json" },
 });
-
-export default apiClient;

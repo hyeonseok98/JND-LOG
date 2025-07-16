@@ -1,7 +1,7 @@
 import { PlayerStatRow } from "@/hooks/use-player-stats";
 import { Mode, PlayerRow, PlayerSummaryRow } from "@/types/lol/players";
 import { sanitize } from "@/util/sanitize";
-import apiClient from ".";
+import { apiClient } from ".";
 import { GOOGLE_ENDPOINTS, GOOGLE_ENDPOINTS_MAP } from "./end-points";
 
 /**
