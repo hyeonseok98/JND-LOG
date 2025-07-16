@@ -130,3 +130,22 @@ export const LINE_ICONS: Record<LolLine, StaticImageData> = {
   AD: iconAd,
   SUP: iconSupport,
 };
+
+type TeamLIST = { name: string; members: string[] };
+
+export const TEAMLISTS: TeamLIST[] = [
+  { name: "중년만화", members: ["푸린", "엠비션", "노페", "러너", "캡틴잭"] },
+  { name: "할만한데", members: ["맛수령", "큐베", "네클릿", "따효니", "매드라이프"] },
+  { name: "신과함께", members: ["룩삼", "플레임", "인간젤리", "눈꽃", "고수달"] },
+  { name: "폭탄목걸이", members: ["승우아빠", "소우릎", "헤징", "플러리", "라콩"] },
+  { name: "오추바사삭", members: ["던", "갱맘", "피닉스박", "마소킴", "이희태"] },
+  { name: "그정도 아니야", members: ["치킨쿤", "인섹", "트롤야", "강퀴", "크캣"] },
+];
+
+export const NAME_TO_CHANNEL: Record<string, string> = Object.fromEntries(
+  StreamerInfos.flatMap((l) => l.members.map((m) => [m.name, m.channelId] as const)),
+);
+
+export const NAME_TO_AVATAR: Record<string, StaticImageData> = Object.fromEntries(
+  StreamerInfos.flatMap((l) => l.members.map((m) => [m.name, m.avatar] as const)),
+) as Record<string, StaticImageData>;
