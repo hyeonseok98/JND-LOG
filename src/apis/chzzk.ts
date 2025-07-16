@@ -18,7 +18,7 @@ export async function getChzzkLiveDetail(channelId: string) {
   const live = data.content;
   return {
     isLive: live.status === "OPEN",
-    title: live.liveTitle,
+    title: live.liveTitle ?? "",
     thumbnailUrl: resizeThumbnail(live.liveImageUrl ?? live.defaultThumbnailImageUrl),
     viewers: live.concurrentUserCount,
     channelName: live.channel.channelName,
@@ -39,6 +39,7 @@ export async function getChzzkLiveDetails(channelIds: string[]) {
           id,
           {
             isLive: live.status === "OPEN",
+            title: live.liveTitle ?? "",
             thumbnail: resizeThumbnail(live.liveImageUrl ?? live.defaultThumbnailImageUrl),
           },
         ] as const;

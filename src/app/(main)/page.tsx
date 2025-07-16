@@ -1,18 +1,19 @@
 export const revalidate = 60;
 
 import BannerImgSea from "@/assets/images/banners/banner-sea.jpg";
-import { SectionLayout } from "@/components/layout";
 import { TARGET_TIME } from "@/constants/countdown";
 import { getDDay } from "@/util/countdown";
 import Image from "next/image";
 import Countdown from "./_components/countdown";
+import LiveChzzkList from "./_components/live-chzzk-list";
+import TeamLiveChzzkList from "./_components/team-live-chzzk-list";
 import Timeline from "./_components/time-line";
 
 export default function HomePage() {
   const ddayText = getDDay(TARGET_TIME);
 
   return (
-    <SectionLayout>
+    <section className="flex flex-col items-center">
       <div className="relative flex justify-center items-center w-[1500px] h-screen rounded-md overflow-hidden">
         <Image src={BannerImgSea} alt="메인 배경" fill className="object-cover" priority />
         <div className="absolute inset-0 bg-black/20 backdrop-blur-[2px]" />
@@ -41,6 +42,15 @@ export default function HomePage() {
           </p>
         </footer>
       </div>
-    </SectionLayout>
+      <section className="flex flex-col items-start max-w-[1500px] w-full pt-10 px-10">
+        <h3 className="text-2xl text-white font-bold mb-4">📺 자낳대 메인 중계</h3>
+        <LiveChzzkList />
+      </section>
+
+      <section className="max-w-[1500px] w-full py-15 px-10">
+        <h3 className="text-2xl text-white font-bold mb-2">📢 팀별 중계 & 프로필</h3>
+        <TeamLiveChzzkList />
+      </section>
+    </section>
   );
 }
