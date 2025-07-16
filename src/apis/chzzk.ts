@@ -1,7 +1,7 @@
 import resizeThumbnail from "@/util/resize-thumbnail";
 import axios from "axios";
+import { apiClient } from ".";
 import { CHZZK_ENDPOINTS } from "./end-points";
-import apiClient from "./index";
 
 export interface ChzzkLiveDetail {
   isLive: boolean;
