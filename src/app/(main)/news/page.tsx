@@ -10,6 +10,7 @@ type Team = {
 type Group = {
   title: string;
   teams: Team[];
+  /** 남은 마지막 경기 매치업 */
   remainingPair: [string, string];
 };
 
@@ -18,8 +19,8 @@ const groups: Group[] = [
     title: "A조",
     teams: [
       { name: "중년만화", played: 4, wins: 1, losses: 3 },
-      { name: "할만한데", played: 2, wins: 2, losses: 0 },
-      { name: "신과함께", played: 2, wins: 1, losses: 1 },
+      { name: "할만한데", played: 3, wins: 2, losses: 1 },
+      { name: "신과함께", played: 3, wins: 2, losses: 1 },
     ],
     remainingPair: ["할만한데", "신과함께"],
   },
@@ -27,80 +28,80 @@ const groups: Group[] = [
     title: "B조",
     teams: [
       { name: "폭탄목걸이", played: 4, wins: 1, losses: 3 },
-      { name: "오추바사삭", played: 2, wins: 2, losses: 0 },
-      { name: "그정도아니야", played: 2, wins: 1, losses: 1 },
+      { name: "오추바사삭", played: 3, wins: 3, losses: 0 },
+      { name: "그정도아니야", played: 3, wins: 1, losses: 2 },
     ],
     remainingPair: ["오추바사삭", "그정도아니야"],
   },
 ];
 
-function cloneTeams(teams: Team[]): Team[] {
-  return teams.map((t) => ({ ...t }));
-}
+const cloneTeams = (teams: Team[]): Team[] => teams.map((t) => ({ ...t }));
 
 /** 정렬: 승률 → 승수 → 이름 */
-function sortTeams(teams: Team[]): Team[] {
-  return [...teams].sort((a, b) => {
+const sortTeams = (teams: Team[]): Team[] =>
+  [...teams].sort((a, b) => {
     const rateA = a.wins / a.played;
     const rateB = b.wins / b.played;
     if (rateA !== rateB) return rateB - rateA;
     if (a.wins !== b.wins) return b.wins - a.wins;
     return a.name.localeCompare(b.name, "ko");
   });
-}
 
 interface Scenario {
   label: string;
   direct: string[];
   tie: string[];
-  table: Team[];
 }
 
+/** 남은 1경기 시나리오(2가지) 산출 */
 function buildScenarios(group: Group): Scenario[] {
   const [xName, yName] = group.remainingPair;
-  const xOrig = group.teams.find((t) => t.name === xName)!;
-  const yOrig = group.teams.find((t) => t.name === yName)!;
-
-  return [2, 1, 0].map((xWins) => {
+  return [1, 0].map((xWin) => {
     const teams = cloneTeams(group.teams);
     const x = teams.find((t) => t.name === xName)!;
     const y = teams.find((t) => t.name === yName)!;
 
-    x.wins += xWins;
-    x.losses += 2 - xWins;
-    x.played += 2;
+    x.wins += xWin;
+    x.losses += 1 - xWin;
+    x.played += 1;
 
-    y.wins += 2 - xWins;
-    y.losses += xWins;
-    y.played += 2;
+    y.wins += 1 - xWin;
+    y.losses += xWin;
+    y.played += 1;
 
     const sorted = sortTeams(teams);
 
-    const rate1 = sorted[0].wins / sorted[0].played;
-    const firstGroup = sorted.filter((t) => t.wins / t.played === rate1);
+    const first = sorted[0];
+    const second = sorted[1];
+    const third = sorted[2];
 
-    let direct: string[] = [];
-    let tie: string[] = [];
+    const firstRate = first.wins / first.played;
+    const secondRate = second.wins / second.played;
 
-    if (firstGroup.length >= 2) {
-      // 2팀 이상 동률 1위 → 모두 데스매치 (상위 2 결정 필요)
-      tie = firstGroup.map((t) => t.name);
+    const direct: string[] = [];
+    const tie: string[] = [];
+
+    // 1위 판단
+    const firstGroup = sorted.filter((t) => t.wins / t.played === firstRate);
+    if (firstGroup.length === 1) {
+      direct.push(first.name);
     } else {
-      direct.push(firstGroup[0].name); // 1위 직행
-      // determine 2위 그룹
-      const rate2 =
-        sorted.find((t) => t.wins / t.played < rate1)!.wins / sorted.find((t) => t.wins / t.played < rate1)!.played;
-      const secondGroup = sorted.filter((t) => t.wins / t.played === rate2);
+      // 1위 동률 2~3팀 모두 tie
+      tie.push(...firstGroup.map((t) => t.name));
+    }
+
+    // 2위 판단 (only if direct already has 1 team)
+    if (direct.length === 1) {
+      const secondGroup = sorted.filter((t) => t.wins / t.played === secondRate && !direct.includes(t.name));
       if (secondGroup.length === 1) {
-        direct.push(secondGroup[0].name); // 2위 확정
+        direct.push(second.name);
       } else {
-        tie = secondGroup.map((t) => t.name); // 2위 동률 → 데스매치
+        tie.push(...secondGroup.map((t) => t.name));
       }
     }
 
-    const label = xWins === 2 ? `${xName} 2‑0 ${yName}` : xWins === 1 ? `1‑1 (동률)` : `${yName} 2‑0 ${xName}`;
-
-    return { label, direct, tie, table: sorted };
+    const label = xWin === 1 ? `${xName} 승` : `${yName} 승`;
+    return { label, direct: [...new Set(direct)], tie: [...new Set(tie)] };
   });
 }
 
@@ -111,6 +112,11 @@ export default function NewsPage() {
         {groups.map((group) => {
           const scenarios = buildScenarios(group);
           const teamsSorted = sortTeams(group.teams);
+
+          // 공통 direct 세트가 동일 & tie가 전부 빈 배열인지 체크
+          const uniqueDirectSets = new Set(scenarios.map((s) => [...s.direct].sort().join("|")));
+          const sameOutcome = uniqueDirectSets.size === 1 && scenarios.every((s) => s.tie.length === 0);
+          const guaranteedTeams = sameOutcome ? scenarios[0].direct.join(", ") : null;
 
           return (
             <article key={group.title} className="bg-gray-900 w-full rounded-2xl shadow-lg p-8 space-y-6">
@@ -148,30 +154,38 @@ export default function NewsPage() {
                 </table>
               </div>
 
-              {/* Scenario Section */}
-              <div className="bg-gray-800/60 px-4 py-5 rounded-lg space-y-4">
+              <div className="bg-gray-800/60 px-4 py-5 rounded-lg space-y-3 text-sm text-gray-300">
                 <h3 className="text-gray-100 font-semibold mb-1">
-                  시나리오별 결과 (남은 2경기: {group.remainingPair[0]} vs {group.remainingPair[1]})
+                  시나리오별 결과 (남은 1경기: {group.remainingPair[0]} vs {group.remainingPair[1]})
                 </h3>
-                <ul className="space-y-2 text-gray-300 text-sm list-disc list-inside">
-                  {scenarios.map((s) => (
-                    <li key={s.label} className="leading-5">
-                      <span className="text-white font-medium">{s.label}</span>
-                      {": "}
-                      {s.direct.length > 0 && (
-                        <>
-                          <span className="text-emerald-400 font-medium">{s.direct.join(", ")}</span> 직행
-                        </>
-                      )}
-                      {s.tie.length > 0 && (
-                        <>
-                          {s.direct.length > 0 && " / "}
-                          ⚔️ <span className="text-amber-300 font-medium">{s.tie.join(" vs ")}</span> 데스매치
-                        </>
-                      )}
-                    </li>
-                  ))}
-                </ul>
+
+                {sameOutcome ? (
+                  <p>
+                    ⚡ 어느 팀이 승리하더라도 
+                    <span className="text-emerald-400 font-medium">{guaranteedTeams}</span>
+                    팀이 다음 라운드에 진출
+                  </p>
+                ) : (
+                  <ul className="space-y-1 list-disc list-inside">
+                    {scenarios.map((s) => (
+                      <li key={s.label} className="leading-5">
+                        <span className="text-white font-medium">{s.label}</span>
+                        {" : "}
+                        {s.direct.length > 0 && (
+                          <>
+                            <span className="text-emerald-400 font-medium">{s.direct.join(", ")}</span> 직행
+                          </>
+                        )}
+                        {s.tie.length > 0 && (
+                          <>
+                            {s.direct.length > 0 && " / "}
+                            ⚔️ <span className="text-amber-300 font-medium">{s.tie.join(" vs ")}</span> 데스매치
+                          </>
+                        )}
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </div>
             </article>
           );
