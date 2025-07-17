@@ -1,5 +1,5 @@
 import { PlayerStatRow } from "@/hooks/use-player-stats";
-import { Mode, PlayerRow, PlayerSummaryRow } from "@/types/lol/players";
+import { MATCH_TYPE, PlayerRow, PlayerSummaryRow } from "@/types/lol/players";
 import { sanitize } from "@/util/sanitize";
 import { apiClient } from ".";
 import { GOOGLE_ENDPOINTS, GOOGLE_ENDPOINTS_MAP } from "./end-points";
@@ -26,7 +26,7 @@ export async function fetchPlayerStats(matchId: string) {
   return data;
 }
 
-export async function fetchPlayerSummary(mode: Mode, playerId?: string) {
+export async function fetchPlayerSummary(mode: MATCH_TYPE, playerId?: string) {
   const { data } = await apiClient.get<PlayerSummaryRow[]>(GOOGLE_ENDPOINTS_MAP[mode], {
     params: { playerId },
   });
