@@ -32,7 +32,7 @@ export default function Countdown() {
       </div>
 
       <p className="mt-2 text-sm text-gray-300 tracking-wide">
-        3팀 2조 풀리그(예선)&nbsp;:&nbsp;2025-07-16(수)&nbsp;18:00
+        플레이오프(본선, 결승전)&nbsp;:&nbsp;2025-07-19(토)&nbsp;13:00
       </p>
     </div>
   );
