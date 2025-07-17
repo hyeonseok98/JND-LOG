@@ -1,9 +1,9 @@
 import { GOOGLE_ENDPOINTS } from "@/apis/end-points";
-import { ChampSummaryRow, MatchRow, SideSummaryRow, TeamSummaryRow } from "@/types/lol/matches";
+import { ChampSummaryRow, MATCH_TYPE, MatchRow, SideSummaryRow, TeamSummaryRow } from "@/types/lol/matches";
 import { apiClient } from ".";
 
 export interface GetMatchesProps {
-  type?: "내전" | "공식스크림" | "비공식스크림";
+  type?: MATCH_TYPE;
 }
 
 /**

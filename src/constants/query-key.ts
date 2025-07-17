@@ -1,4 +1,4 @@
-import { Mode } from "@/types/lol/players";
+import { MATCH_TYPE } from "@/types/lol/matches";
 
 export const QUERY_KEYS = {
   CHZZK: {
@@ -8,7 +8,7 @@ export const QUERY_KEYS = {
   GOOGLE_SHEET: {
     PLAYERS: (matchId?: string) => ["players", matchId] as const,
     PLAYERS_STATS: (matchId: string) => ["playerStats", matchId] as const,
-    PLAYERS_SUMMARY: (mode: Mode, playerId?: string) => ["players_summary", mode, playerId] as const,
+    PLAYERS_SUMMARY: (mode: MATCH_TYPE, playerId?: string) => ["players_summary", mode, playerId] as const,
     MATCHES: (type?: string) => ["matches", type ?? "전체"] as const,
     MATCHES_BY_DATE: (date?: string) => ["matches", date] as const,
     TEAMS: (team: string) => ["teams", team] as const,

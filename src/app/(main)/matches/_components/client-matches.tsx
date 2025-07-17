@@ -13,6 +13,8 @@ interface ClientMatchesProps {
 }
 
 const DATE_NOTES: Record<string, string> = {
+  "2025-07-19": "플레이오프",
+  "2025-07-17": "시드 결정전",
   "2025-07-16": "3팀 2조 풀리그",
   "2025-07-15": "공식 스크림 3일차",
   "2025-07-14": "공식 스크림 2일차",
@@ -59,9 +61,7 @@ export default function ClientMatches({ initialData }: ClientMatchesProps) {
                           {m.headerBlue} 팀
                         </span>
                         <span className="hidden md:inline">({m.bluePlayers})</span>
-
                         <span className="mx-1 text-muted-foreground">vs</span>
-
                         <span className={m.winner === m.headerRed ? "text-rose-400" : undefined}>{m.headerRed} 팀</span>
                         <span className="hidden md:inline">({m.redPlayers})</span>
                       </span>

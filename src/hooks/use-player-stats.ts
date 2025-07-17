@@ -1,6 +1,6 @@
 import { fetchPlayerStats, fetchPlayerSummary } from "@/apis/players";
 import { QUERY_KEYS } from "@/constants/query-key";
-import { Mode } from "@/types/lol/players";
+import { MATCH_TYPE } from "@/types/lol/matches";
 import { useQuery } from "@tanstack/react-query";
 
 export interface PlayerStatRow {
@@ -34,7 +34,7 @@ export function usePlayerStats(matchId: string) {
   });
 }
 
-export function usePlayerSummary(mode: Mode, playerId?: string) {
+export function usePlayerSummary(mode: MATCH_TYPE, playerId?: string) {
   return useQuery({
     queryKey: QUERY_KEYS.GOOGLE_SHEET.PLAYERS_SUMMARY(mode, playerId),
     queryFn: () => fetchPlayerSummary(mode, playerId),

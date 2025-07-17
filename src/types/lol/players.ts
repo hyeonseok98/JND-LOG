@@ -1,4 +1,5 @@
-export type Mode = "내전" | "공식스크림" | "비공식스크림";
+import { MATCH_TYPE } from "./matches";
+
 export interface PlayerRow {
   /* 기본키 */
   matchId: string;
@@ -11,7 +12,7 @@ export interface PlayerRow {
   champion: string;
 
   /* 구분 */
-  type: "내전" | "공식스크림" | "비공식스크림";
+  type: MATCH_TYPE;
 
   /* 원-데이터 */
   win: number | null;
