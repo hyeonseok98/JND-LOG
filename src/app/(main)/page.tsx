@@ -42,12 +42,12 @@ export default function HomePage() {
           </p>
         </footer>
       </div>
-      <section className="flex flex-col items-start max-w-[1500px] w-full pt-10 px-10">
+      <section className="flex flex-col items-start max-w-[1500px] w-full pt-10">
         <h3 className="text-2xl text-white font-bold mb-4">📺 자낳대 메인 중계</h3>
         <LiveChzzkList />
       </section>
 
-      <section className="max-w-[1500px] w-full py-14 px-10">
+      <section className="max-w-[1500px] w-full py-14">
         <h3 className="text-2xl text-white font-bold mb-2">📢 팀별 중계 & 프로필</h3>
         <TeamLiveChzzkList />
       </section>

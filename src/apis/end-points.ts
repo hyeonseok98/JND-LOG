@@ -21,7 +21,8 @@ export const GOOGLE_ENDPOINTS_MAP: Record<MATCH_TYPE, string> = {
   내전: "/api/players_summary_내전",
   공식스크림: "/api/players_summary_공식스크림",
   비공식스크림: "/api/players_summary_비공식스크림",
-  조별리그: "/api/players_summary_조별리그",
+  조별리그A조: "/api/players_summary_조별리그A조",
+  조별리그B조: "/api/players_summary_조별리그B조",
+  시드결정전: "/api/players_summary_시드결정전",
   플레이오프: "/api/players_summary_플레이오프",
-  결승: "/api/players_summary_결승",
 };

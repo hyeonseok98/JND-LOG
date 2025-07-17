@@ -1,4 +1,4 @@
-import { MATCH_TYPE } from "@/types/lol/players";
+import { MATCH_TYPE } from "@/types/lol/matches";
 
 export const QUERY_KEYS = {
   CHZZK: {

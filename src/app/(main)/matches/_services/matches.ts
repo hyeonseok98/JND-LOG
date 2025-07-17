@@ -13,10 +13,17 @@ export type MatchWithPlayers = MatchRow & {
   headerRed: string;
 };
 
-/* ───────── 시트-serial → 날짜 문자열 ─────────
-   구글시트 기준 0 일자는 1899-12-30 */
+/* 시트-serial → 날짜 문자열
+   예시:구글시트 기준 0 일자는 1899-12-30 */
 function serialToDateString(serial: number) {
   return dayjs("1899-12-30").add(serial, "day").format("YYYY-MM-DD");
+}
+
+/* matchId 의 마지막 숫자를 파싱 
+   예시: 2025‑07‑01‑173 → 173) */
+function extractSeq(id: string): number {
+  const last = id.split("-").pop();
+  return Number(last) || 0;
 }
 
 export async function fetchMatchesByDate(): Promise<[string, MatchWithPlayers[]][]> {
@@ -64,14 +71,9 @@ export async function fetchMatchesByDate(): Promise<[string, MatchWithPlayers[]]
       (m) => m.date as string,
     ),
   )
-    .sort(([d1], [d2]) => dayjs(d2).valueOf() - dayjs(d1).valueOf()) // 그룹 정렬
+    .sort(([d1], [d2]) => dayjs(d2).valueOf() - dayjs(d1).valueOf())
     .map<[string, MatchWithPlayers[]]>(([date, list]) => [
       date,
-      list.sort(
-        (
-          a,
-          b, // 같은 날 안에서 최신순
-        ) => dayjs(b.date + " " + b.matchId).valueOf() - dayjs(a.date + " " + a.matchId).valueOf(),
-      ),
+      list.sort((a, b) => extractSeq(b.matchId) - extractSeq(a.matchId)),
     ]);
 }

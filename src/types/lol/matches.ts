@@ -1,4 +1,11 @@
-export type MATCH_TYPE = "내전" | "공식스크림" | "비공식스크림" | "조별리그" | "플레이오프" | "결승";
+export type MATCH_TYPE =
+  | "내전"
+  | "공식스크림"
+  | "비공식스크림"
+  | "조별리그A조"
+  | "조별리그B조"
+  | "시드결정전"
+  | "플레이오프";
 
 export interface MatchRow {
   matchId: string;

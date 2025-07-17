@@ -1,5 +1,6 @@
 import { PlayerStatRow } from "@/hooks/use-player-stats";
-import { MATCH_TYPE, PlayerRow, PlayerSummaryRow } from "@/types/lol/players";
+import { MATCH_TYPE } from "@/types/lol/matches";
+import { PlayerRow, PlayerSummaryRow } from "@/types/lol/players";
 import { sanitize } from "@/util/sanitize";
 import { apiClient } from ".";
 import { GOOGLE_ENDPOINTS, GOOGLE_ENDPOINTS_MAP } from "./end-points";

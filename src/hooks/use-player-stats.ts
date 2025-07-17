@@ -1,6 +1,6 @@
 import { fetchPlayerStats, fetchPlayerSummary } from "@/apis/players";
 import { QUERY_KEYS } from "@/constants/query-key";
-import { MATCH_TYPE } from "@/types/lol/players";
+import { MATCH_TYPE } from "@/types/lol/matches";
 import { useQuery } from "@tanstack/react-query";
 
 export interface PlayerStatRow {
