@@ -24,7 +24,7 @@ export default function HomePage() {
 
         <div className="mb-16 text-white text-[90px] font-bold text-center z-10">
           <h2 className="text-[90px]">
-            조별 리그 <br />
+            플레이오프 <br />
           </h2>
           <span className="wave-text" data-text={ddayText}>
             {ddayText}
@@ -43,7 +43,7 @@ export default function HomePage() {
         </footer>
       </div>
       <section className="flex flex-col items-start max-w-[1500px] w-full pt-10">
-        <h3 className="text-2xl text-white font-bold mb-4">📺 자낳대 메인 중계</h3>
+        <h3 className="text-2xl text-white font-bold mb-6">📺 자낳대 메인 중계</h3>
         <LiveChzzkList />
       </section>
 

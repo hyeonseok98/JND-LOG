@@ -8,9 +8,9 @@ import Link from "next/link";
 
 const MAIN_STREAME: { id: string; name: string; avatar: StaticImageData }[] = [
   { id: "22bd842599735ae19e454983280f611e", name: "인첸트A", avatar: "/logo/pig.png" as unknown as StaticImageData },
-  { id: "a53ae259f77b730616f8b533aeac8bee", name: "인첸트B", avatar: "/logo/pig.png" as unknown as StaticImageData },
-  { id: "560651bcf90a9399dbe79c6bd2ebbf0e", name: "포니", avatar: "/logo/pig.png" as unknown as StaticImageData },
-  { id: "368ca51e82c85583e059fe669ef0f028", name: "김정민", avatar: "/logo/pig.png" as unknown as StaticImageData },
+  // { id: "a53ae259f77b730616f8b533aeac8bee", name: "인첸트B", avatar: "/logo/pig.png" as unknown as StaticImageData },
+  // { id: "560651bcf90a9399dbe79c6bd2ebbf0e", name: "포니", avatar: "/logo/pig.png" as unknown as StaticImageData },
+  // { id: "368ca51e82c85583e059fe669ef0f028", name: "김정민", avatar: "/logo/pig.png" as unknown as StaticImageData },
 ];
 
 export default function LiveChzzkList() {
